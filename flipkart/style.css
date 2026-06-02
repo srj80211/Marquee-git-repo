@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.mainContainer{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(255, 255, 207);
+}
+
+.box1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: auto;
+    background-color: red;
+    margin: 0 10% 0 10%;
+}
+
+.logo{
+    height: 70%;
+    width: 20%;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.logo1{
+    height: 100%;
+    width: 40%;
+    background-color: yellow;
+    border-radius: 20px;
+}
+.logo2{
+    height: 100%;
+    width: 40%;
+    background-color: gray;
+    border-radius: 20px;
+}
+
+.location{
+    height: 70%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    background-color: blue;
+}

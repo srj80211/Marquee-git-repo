@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flipkart Layout</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --fk-blue: #2874f0;
+      --fk-yellow: #f9a825;
+      --fk-bg: #f1f3f6;
+      --fk-white: #ffffff;
+      --fk-border: #e0e0e0;
+      --fk-text-muted: #878787;
+      --fk-card-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      --nav-h: 56px;
+      --cat-h: 64px;
+      --header-total: calc(var(--nav-h) + var(--cat-h));
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--fk-bg);
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--fk-white);
+      border-bottom: 1px solid var(--fk-border);
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px;
+      gap: 16px;
+    }
+    .top-bar-item {
+      width: 100px;
+      height: 14px;
+      background: var(--fk-border);
+      border-radius: 3px;
+    }
+    .top-bar-item.wide { width: 180px; }
+
+    /* ── STICKY HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--fk-blue);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Logo + Travel tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .nav-tab {
+      background: var(--fk-white);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      height: 36px;
+    }
+    .nav-tab .tab-icon {
+      width: 22px; height: 22px;
+      background: var(--fk-yellow);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nav-tab .tab-icon.plane {
+      background: #ff6b35;
+    }
+    .nav-tab .tab-label {
+      width: 60px; height: 12px;
+      background: var(--fk-border);
+      border-radius: 3px;
+    }
+
+    /* Delivery line (top-right of header first row) */
+    .nav-delivery {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .delivery-pin {
+      width: 12px; height: 16px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .delivery-text {
+      width: 90px; height: 12px;
+      background: rgba(255,255,255,0.35);
+      border-radius: 3px;
+    }
+    .delivery-link {
+      width: 140px; height: 14px;
+      background: rgba(255,255,255,0.70);
+      border-radius: 3px;
+    }
+    .delivery-arrow {
+      width: 8px; height: 12px;
+      background: rgba(255,255,255,0.55);
+      border-radius: 2px;
+    }
+
+    /* ── SEARCH ROW ── */
+    .search-row {
+      background: var(--fk-blue);
+      padding: 8px 24px 10px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .search-bar {
+      flex: 1;
+      height: 40px;
+      background: var(--fk-white);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 10px;
+      border: 2px solid var(--fk-blue);
+      box-shadow: 0 0 0 2px rgba(40,116,240,0.15);
+    }
+    .search-icon {
+      width: 18px; height: 18px;
+      background: var(--fk-border);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .search-placeholder {
+      width: 260px; height: 13px;
+      background: #e8e8e8;
+      border-radius: 3px;
+    }
+
+    /* Right nav actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .nav-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .action-icon {
+      width: 22px; height: 22px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .action-label {
+      width: 40px; height: 13px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 3px;
+    }
+    .action-caret {
+      width: 8px; height: 10px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 2px;
+    }
+    .cart-action {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cart-icon-wrap {
+      position: relative;
+    }
+    .cart-icon {
+      width: 24px; height: 22px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+    }
+    .cart-badge {
+      width: 14px; height: 14px;
+      background: var(--fk-yellow);
+      border-radius: 50%;
+      position: absolute;
+      top: -6px; right: -6px;
+    }
+    .cart-label {
+      width: 30px; height: 13px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 3px;
+    }
+
+    /* ── CATEGORY NAV ── */
+    .category-nav {
+      background: var(--fk-white);
+      border-bottom: 1px solid var(--fk-border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    }
+    .category-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: var(--cat-h);
+      padding: 0 16px;
+      gap: 0;
+      overflow: hidden;
+    }
+    .cat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      flex-shrink: 0;
+    }
+    .cat-item.active {
+      border-bottom-color: var(--fk-blue);
+    }
+    .cat-icon {
+      width: 32px; height: 32px;
+      background: var(--fk-bg);
+      border-radius: 50%;
+    }
+    .cat-item.active .cat-icon {
+      background: #e8f0fe;
+    }
+    .cat-label {
+      width: 46px; height: 10px;
+      background: var(--fk-border);
+      border-radius: 3px;
+    }
+    .cat-item.active .cat-label {
+      background: var(--fk-blue);
+      opacity: 0.5;
+    }
+
+    /* ── MAIN CONTENT ── */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 16px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ── BANNER CAROUSEL ── */
+    .banner-section {
+      display: grid;
+      grid-template-columns: 1fr 1.55fr 1fr;
+      gap: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .banner-card {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--fk-white);
+      box-shadow: var(--fk-card-shadow);
+      position: relative;
+    }
+    .banner-card .banner-img-area {
+      width: 100%;
+      padding-top: 52%;
+      background: linear-gradient(135deg, #dde8ff 0%, #c4d8ff 100%);
+      position: relative;
+    }
+    .banner-card:nth-child(2) .banner-img-area {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding-top: 52%;
+    }
+    .banner-card:nth-child(3) .banner-img-area {
+      background: linear-gradient(135deg, #003399 0%, #0055cc 100%);
+    }
+    .banner-ad-badge {
+      position: absolute;
+      bottom: 8px; right: 10px;
+      width: 22px; height: 14px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+    }
+    .banner-content {
+      padding: 10px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .banner-title {
+      width: 70%; height: 14px;
+      background: var(--fk-border);
+      border-radius: 3px;
+    }
+    .banner-sub {
+      width: 50%; height: 11px;
+      background: #ebebeb;
+      border-radius: 3px;
+    }
+    /* Carousel dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 0 2px;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--fk-border);
+    }
+    .dot.active {
+      background: var(--fk-blue);
+      width: 18px;
+      border-radius: 4px;
+    }
+
+    /* ── SECTION CARD (Still looking / product sections) ── */
+    .section-card {
+      background: var(--fk-white);
+      border-radius: 8px;
+      box-shadow: var(--fk-card-shadow);
+      padding: 16px 16px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      width: 200px; height: 16px;
+      background: #d4d4d4;
+      border-radius: 4px;
+    }
+    .section-title.dark { background: #bbb; }
+    .section-link {
+      width: 80px; height: 12px;
+      background: #c5d9ff;
+      border-radius: 3px;
+    }
+
+    /* "Still looking for these?" — yellow bg */
+    .section-card.yellow-bg {
+      background: #e8f53a;
+    }
+    .section-card.yellow-bg .section-title.dark {
+      background: rgba(0,0,0,0.25);
+    }
+
+    /* Product grid rows */
+    .product-row {
+      display: grid;
+      gap: 12px;
+    }
+    .product-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .product-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .product-row.cols-5 { grid-template-columns: repeat(5, 1fr); }
+    .product-row.cols-6 { grid-template-columns: repeat(6, 1fr); }
+
+    .product-card {
+      border-radius: 6px;
+      background: var(--fk-white);
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow .2s;
+    }
+    .section-card.yellow-bg .product-card {
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+    .product-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.13); }
+
+    .product-img {
+      width: 100%;
+      padding-top: 100%;
+      background: linear-gradient(145deg, #f0f0f0 30%, #e0e0e0 100%);
+      position: relative;
+    }
+    /* subtle shimmer */
+    .product-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .product-info {
+      padding: 8px 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .product-name {
+      width: 85%; height: 11px;
+      background: #d8d8d8;
+      border-radius: 3px;
+    }
+    .product-name.short { width: 60%; }
+    .product-price {
+      width: 50%; height: 12px;
+      background: #c8c8c8;
+      border-radius: 3px;
+    }
+    .product-discount {
+      width: 40%; height: 10px;
+      background: #e0f5e0;
+      border-radius: 3px;
+    }
+
+    /* ── DUAL SECTION GRID ── */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #172337;
+      color: #fff;
+      margin-top: 24px;
+    }
+    .footer-top {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+      padding: 32px 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-col { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col-title {
+      width: 70%; height: 11px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 3px;
+    }
+    .footer-link {
+      width: 60%; height: 10px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 3px;
+    }
+    .footer-link.short { width: 45%; }
+    .footer-link.long  { width: 80%; }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      gap: 16px;
+    }
+    .footer-logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-logo {
+      width: 80px; height: 24px;
+      background: var(--fk-yellow);
+      border-radius: 4px;
+      opacity: 0.85;
+    }
+    .footer-tagline {
+      width: 120px; height: 12px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+    }
+    .footer-payment {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .payment-chip {
+      width: 42px; height: 26px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Scrollbar polish */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-thumb { background: #c0c0c0; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-item wide"></div>
+    <div class="top-bar-item"></div>
+    <div class="top-bar-item"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <!-- Row 1: Logo + Delivery -->
+    <div class="navbar">
+      <div class="nav-tabs">
+        <div class="nav-tab">
+          <div class="tab-icon"></div>
+          <div class="tab-label"></div>
+        </div>
+        <div class="nav-tab">
+          <div class="tab-icon plane"></div>
+          <div class="tab-label"></div>
+        </div>
+      </div>
+      <div class="nav-delivery">
+        <div class="delivery-pin"></div>
+        <div class="delivery-text"></div>
+        <div class="delivery-link"></div>
+        <div class="delivery-arrow"></div>
+      </div>
+    </div>
+
+    <!-- Row 2: Search + Actions -->
+    <div class="search-row">
+      <div class="search-bar">
+        <div class="search-icon"></div>
+        <div class="search-placeholder"></div>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-action">
+          <div class="action-icon"></div>
+          <div class="action-label"></div>
+          <div class="action-caret"></div>
+        </div>
+        <div class="nav-action">
+          <div class="action-label"></div>
+          <div class="action-caret"></div>
+        </div>
+        <div class="cart-action">
+          <div class="cart-icon-wrap">
+            <div class="cart-icon"></div>
+            <div class="cart-badge"></div>
+          </div>
+          <div class="cart-label"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORY NAV -->
+  <nav class="category-nav">
+    <div class="category-nav-inner">
+      <!-- 14 category items -->
+      <div class="cat-item active">
+        <div class="cat-icon"></div>
+        <div class="cat-label"></div>
+      </div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+      <div class="cat-item"><div class="cat-icon"></div><div class="cat-label"></div></div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- BANNER CAROUSEL -->
+    <section class="banner-section">
+      <div class="banner-card">
+        <div class="banner-img-area"><div class="banner-ad-badge"></div></div>
+        <div class="banner-content">
+          <div class="banner-title"></div>
+          <div class="banner-sub"></div>
+        </div>
+      </div>
+      <div class="banner-card">
+        <div class="banner-img-area"><div class="banner-ad-badge"></div></div>
+        <div class="banner-content">
+          <div class="banner-title"></div>
+          <div class="banner-sub"></div>
+        </div>
+      </div>
+      <div class="banner-card">
+        <div class="banner-img-area"><div class="banner-ad-badge"></div></div>
+        <div class="banner-content">
+          <div class="banner-title"></div>
+          <div class="banner-sub"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carousel Dots -->
+    <div class="carousel-dots">
+      <div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <!-- STILL LOOKING FOR THESE — yellow section -->
+    <section class="section-card yellow-bg">
+      <div class="section-header">
+        <div class="section-title dark"></div>
+      </div>
+      <div class="product-row cols-3">
+        <div class="product-card">
+          <div class="product-img"></div>
+          <div class="product-info">
+            <div class="product-name short"></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img"></div>
+          <div class="product-info">
+            <div class="product-name short"></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img"></div>
+          <div class="product-info">
+            <div class="product-name short"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEALS OF THE DAY — full width -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title"></div>
+        <div class="section-link"></div>
+      </div>
+      <div class="product-row cols-6">
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+      </div>
+    </section>
+
+    <!-- DUAL SECTION: Best of Electronics + Fashion -->
+    <div class="dual-grid">
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title"></div>
+          <div class="section-link"></div>
+        </div>
+        <div class="product-row cols-4">
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+        </div>
+      </section>
+      <section class="section-card">
+        <div class="section-header">
+          <div class="section-title"></div>
+          <div class="section-link"></div>
+        </div>
+        <div class="product-row cols-4">
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+          <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name short"></div><div class="product-price"></div></div></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TOP OFFERS — full 5-col -->
+    <section class="section-card">
+      <div class="section-header">
+        <div class="section-title"></div>
+        <div class="section-link"></div>
+      </div>
+      <div class="product-row cols-5">
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+        <div class="product-card"><div class="product-img"></div><div class="product-info"><div class="product-name"></div><div class="product-price"></div><div class="product-discount"></div></div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="footer-col-title"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link short"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link long"></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link short"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link"></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link short"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link long"></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link short"></div>
+        <div class="footer-link"></div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link short"></div>
+        <div class="footer-link"></div>
+        <div class="footer-link long"></div>
+        <div class="footer-link"></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-logo-area">
+        <div class="footer-logo"></div>
+        <div class="footer-tagline"></div>
+      </div>
+      <div class="footer-payment">
+        <div class="payment-chip"></div>
+        <div class="payment-chip"></div>
+        <div class="payment-chip"></div>
+        <div class="payment-chip"></div>
+        <div class="payment-chip"></div>
+        <div class="payment-chip"></div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

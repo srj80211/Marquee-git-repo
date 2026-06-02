@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMyShow Clone Layout</title>
+    <link rel="stylesheet" href="BookMyShow.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="" alt="BookMyShow Logo">
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+            </div>
+            <div class="nav-right">
+                <span class="location-picker">Ahmedabad</span>
+                <button class="signin-btn">Sign in</button>
+                <div class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sub-nav">
+        <div class="sub-nav-container">
+            <div class="nav-links-left">
+                <a href="#">Movies</a>
+                <a href="#">Stream</a>
+                <a href="#">Events</a>
+                <a href="#">Plays</a>
+                <a href="#">Sports</a>
+                <a href="#">Activities</a>
+                <a href="#">TATA IPL 2026</a>
+            </div>
+            <div class="nav-links-right">
+                <a href="#">ListYourShow</a>
+                <a href="#">Corporates</a>
+                <a href="#">Offers</a>
+                <a href="#">Gift Cards</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-carousel">
+        
+        <div class="carousel-container">
+            <!-- <div class="banner-side">
+                <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1779690032975_michaelwebwebmay.jpg" alt="Side Banner Layout">
+            </div> -->
+            <div class="banner-main">
+                <img src="https://assets-in-gm.bmscdn.com/promotions/cms/creatives/1776147534355_popwebnew.jpg" alt="Main Stream Banner">
+            </div>
+        </div>
+        
+    </section>
+
+    <main class="content-container">
+        <section class="recommended-movies">
+            <div class="section-header">
+                <h2>Recommended Movies</h2>
+                <a href="#" class="see-all">See All &gt;</a>
+            </div>
+            
+            <div class="movie-grid">
+                <div class="movie-card">
+                    <div class="poster-box">
+                        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC,e-usm-2-2-0.5-0.008:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC42LzEwICA2LjJLKyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00484700-nstldwkesv-portrait.jpg" alt="">
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="poster-box">
+                        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC,e-usm-2-2-0.5-0.008:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OS41LzEwICA1OTArIFZvdGVz,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00497037-dyjuhddaez-portrait.jpg" alt="">
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="poster-box">
+                        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC,e-usm-2-2-0.5-0.008:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OS8xMCAgOTgwKyBWb3Rlcw%3D%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00495959-dksukhafwt-portrait.jpg" alt="">
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="poster-box">
+                        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC,e-usm-2-2-0.5-0.008:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OC41LzEwICAxNC40SysgVm90ZXM%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00485890-rrwgnrapqk-portrait.jpg" alt="">
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <div class="poster-box">
+                        <img src="https://assets-in.bmscdn.com/discovery-catalog/events/tr:w-400,h-600,bg-CCCCCC,e-usm-2-2-0.5-0.008:w-400.0,h-660.0,cm-pad_resize,bg-000000,fo-top:l-image,i-discovery-catalog@@icons@@star-icon-202203010609.png,lx-24,ly-615,w-29,l-end:l-text,ie-OS4xLzEwICAyNC4zSysgVm90ZXM%3D,fs-29,co-FFFFFF,ly-612,lx-70,pa-8_0_0_0,l-end/et00495498-mcqealqwgs-portrait.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.nav-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 40px;
+    display: block;
+}
+
+.search-bar {
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 30px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.location-picker {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.signin-btn {
+    background-color: #f84464;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    width: 20px;
+    height: 2px;
+    background-color: #333;
+}
+
+/* Sub-Nav */
+.sub-nav {
+    background-color: #f2f2f2;
+    padding: 12px 0;
+    font-size: 14px;
+}
+
+.sub-nav-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.sub-nav a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 20px;
+}
+
+.nav-links-right a {
+    margin-right: 0;
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+/* Hero Carousel */
+.hero-carousel {
+    position: relative;
+    background-color: #ebebeb;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-container {
+    display: flex;
+    max-width: 1240px;
+    width: 100%;
+    gap: 15px;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.banner-side {
+    width: 20%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000; /* Placeholder color */
+}
+
+.banner-main {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1a273a; /* Placeholder color */
+}
+
+.banner-side img, .banner-main img {
+    width: 100%;
+    height: 300px; /* Adjusted height for display aspect */
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.prev { left: 10px; border-radius: 0 4px 4px 0; }
+.next { right: 10px; border-radius: 4px 0 0 4px; }
+
+/* Recommended Movies Layout */
+.content-container {
+    max-width: 1240px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.see-all {
+    color: #f84464;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.movie-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.movie-card {
+    flex: 1;
+    max-width: 230px;
+}
+
+.poster-box {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-color: #ddd; /* Placeholder box color */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.poster-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
