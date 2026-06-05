@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AdminLTE 4 Dashboard Clone</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <style>
+            /* --- Reset & Core Styles --- */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: "Source Sans Pro", sans-serif;
+                background-color: #1a202c;
+                color: #ced4da;
+                overflow-x: hidden;
+            }
+
+            /* --- Master Grid Layout --- */
+            .app-container {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                grid-template-rows: 56px 1fr;
+                grid-template-areas:
+                    "sidebar navbar"
+                    "sidebar main";
+                min-height: 100vh;
+            }
+
+            /* --- Top Navbar --- */
+            .navbar {
+                grid-area: navbar;
+                background-color: #212529;
+                border-bottom: 1px solid #4b5563;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1rem;
+            }
+            .nav-left,
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+            }
+            .nav-link {
+                color: #adb5bd;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 0.95rem;
+            }
+            .nav-link:hover {
+                color: #fff;
+            }
+            .badge {
+                font-size: 0.65rem;
+                padding: 2px 4px;
+                border-radius: 3px;
+                position: absolute;
+                top: -6px;
+                right: -8px;
+            }
+            .bg-warning {
+                background-color: #ffc107;
+                color: #1f2d3d;
+            }
+            .bg-danger {
+                background-color: #dc3545;
+                color: #fff;
+            }
+
+            .user-profile {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-color: #6c757d;
+            }
+
+            /* --- Sidebar Navigation --- */
+            .sidebar {
+                grid-area: sidebar;
+                background-color: #212529;
+                border-right: 1px solid #4b5563;
+                padding: 0.75rem;
+            }
+            .brand-link {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #fff;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid #4b5563;
+                margin-bottom: 1rem;
+            }
+            .brand-logo {
+                width: 33px;
+                height: 33px;
+                background-color: #4b5563;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+            }
+            .menu-label {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                color: #6c757d;
+                font-weight: 700;
+                margin: 1.2rem 0 0.5rem 0.5rem;
+            }
+            .menu-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.6rem 0.75rem;
+                color: #c2c7d0;
+                text-decoration: none;
+                border-radius: 0.25rem;
+                margin-bottom: 0.2rem;
+                font-size: 0.95rem;
+            }
+            .menu-item.active {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #fff;
+            }
+            .menu-item:hover:not(.active) {
+                background-color: rgba(255, 255, 255, 0.05);
+                color: #fff;
+            }
+            .menu-content {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            .submenu {
+                padding-left: 1rem;
+            }
+            .submenu .menu-item {
+                font-size: 0.9rem;
+            }
+
+            /* --- Main Content Workspace --- */
+            .main-content {
+                grid-area: main;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .content-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .content-header h1 {
+                font-size: 1.8rem;
+                font-weight: 400;
+                color: #fff;
+            }
+            .breadcrumb {
+                font-size: 0.9rem;
+                color: #6c757d;
+            }
+            .breadcrumb span {
+                color: #0d6efd;
+            }
+
+            /* --- CSS Grid: Info Boxes Layout --- */
+            .info-box-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.25rem;
+                height: 20vh;
+            }
+            .card-box {
+                border-radius: 0.25rem;
+                position: relative;
+                color: #fff;
+                padding: 1.25rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 140px;
+                overflow: hidden;
+                box-shadow:
+                    0 0 1px rgba(0, 0, 0, 0.125),
+                    0 1px 3px rgba(0, 0, 0, 0.2);
+            }
+            .card-box h3 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                margin-bottom: 0.3rem;
+            }
+            .card-box p {
+                font-size: 0.95rem;
+                z-index: 2;
+            }
+            .card-box .icon-bg {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+                font-size: 4.5rem;
+                color: rgba(0, 0, 0, 0.15);
+                transition: transform 0.3s linear;
+            }
+            .card-box:hover .icon-bg {
+                transform: scale(1.1);
+            }
+            .more-info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.1);
+                padding: 4px 0;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: none;
+                font-size: 0.85rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+            .more-info:hover {
+                background: rgba(0, 0, 0, 0.2);
+                color: #fff;
+            }
+
+            /* Card-box Variations */
+            .bg-blue {
+                background-color: #0d6efd;
+            }
+            .bg-green {
+                background-color: #198754;
+            }
+            .bg-yellow {
+                background-color: #ffc107;
+                color: #1f2d3d !important;
+            }
+            .bg-yellow .more-info {
+                color: rgba(31, 45, 61, 0.8);
+            }
+            .bg-red {
+                background-color: #dc3545;
+            }
+
+            /* --- CSS Grid: Analytics Section (Charts & Maps) --- */
+            .analytics-grid {
+                display: grid;
+                grid-template-columns: 1.6fr 1fr;
+                gap: 1.25rem;
+            }
+            .chart-card {
+                background-color: #212529;
+                border: 1px solid #343a40;
+                border-radius: 0.25rem;
+                padding: 1.25rem;
+                display: flex;
+                flex-direction: column;
+            }
+            .chart-header {
+                font-size: 1.05rem;
+                font-weight: 400;
+                color: #fff;
+                margin-bottom: 1.5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Simulated Vector Graphics via CSS & SVG */
+            .sales-graph-container {
+                background-image: url(graph.png);
+                background-size: cover;
+                width: 100%;
+                height: 280px;
+                position: relative;
+                margin-top: auto;
+            }
+            .map-card {
+                background-color: #3b82f6;
+                background-image: url(map.png);
+                background-position: center;
+                color: #fff;
+                border-radius: 0.25rem;
+                padding: 1.25rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                position: relative;
+            }
+            .map-tools i {
+                cursor: pointer;
+                opacity: 0.8;
+                margin-left: 0.5rem;
+            }
+            .map-tools i:hover {
+                opacity: 1;
+            }
+            .vector-map-sim {
+                width: 100%;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                opacity: 0.9;
+                margin: 1rem 0;
+            }
+
+            /* Map Mini Sparklines row Grid */
+            .map-sparklines {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+                text-align: center;
+                font-size: 0.85rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                padding-top: 0.75rem;
+            }
+            .sparkline-box svg {
+                width: 100%;
+                height: 30px;
+                margin-bottom: 4px;
+            }
+
+            /* --- Chat Panel Footer --- */
+            .chat-card {
+                background-color: #212529;
+                border: 1px solid #343a40;
+                border-radius: 0.25rem;
+                padding: 1rem 1.25rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .chat-left {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: #fff;
+            }
+            .chat-badge {
+                background-color: #0d6efd;
+                font-size: 0.75rem;
+                padding: 2px 6px;
+                border-radius: 10px;
+            }
+            .chat-tools {
+                display: flex;
+                gap: 0.75rem;
+                color: #6c757d;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <aside class="sidebar">
+                <div class="brand-link">
+                    <div class="brand-logo">A</div>
+                    <span>AdminLTE 4</span>
+                </div>
+
+                <nav class="sidebar-menu">
+                    <a href="#" class="menu-item active">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-gauge-high"></i>
+                            <span>Dashboard</span>
+                        </div>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </a>
+
+                    <div class="submenu">
+                        <a href="#" class="menu-item active">
+                            <div class="menu-content">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Dashboard v1</span>
+                            </div>
+                        </a>
+                        <a href="#" class="menu-item">
+                            <div class="menu-content">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Dashboard v2</span>
+                            </div>
+                        </a>
+                        <a href="#" class="menu-item">
+                            <div class="menu-content">
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Dashboard v3</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-palette"></i>
+                            <span>Theme Generate</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-box"></i>
+                            <span>Widgets</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>Layout Options</span>
+                        </div>
+                        <span class="badge bg-blue">7</span>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-tree"></i>
+                            <span>UI Elements</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Mailbox</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                            <span>Forms</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-table"></i>
+                            <span>Tables</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <div class="menu-label">Pages</div>
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-regular fa-folder"></i>
+                            <span>Pages</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <div class="menu-label">Examples</div>
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>Auth</span>
+                        </div>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+
+                    <div class="menu-label">Multi Level Example</div>
+                    <a href="#" class="menu-item">
+                        <div class="menu-content">
+                            <i class="fa-regular fa-circle"></i>
+                            <span>Level 1</span>
+                        </div>
+                    </a>
+                </nav>
+            </aside>
+
+            <header class="navbar">
+                <div class="nav-left">
+                    <span class="nav-link"
+                        ><i class="fa-solid fa-bars"></i
+                    ></span>
+                    <span class="nav-link">Live preview</span>
+                    <span class="nav-link">Documentation</span>
+                </div>
+
+                <div class="nav-right">
+                    <span class="nav-link"
+                        ><i class="fa-solid fa-magnifying-glass"></i
+                    ></span>
+
+                    <span class="nav-link" style="position: relative">
+                        <i class="fa-regular fa-comments"></i>
+                        <span class="badge bg-danger">3</span>
+                    </span>
+
+                    <span class="nav-link" style="position: relative">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge bg-warning">15</span>
+                    </span>
+
+                    <span class="nav-link"
+                        ><i class="fa-solid fa-expand"></i
+                    ></span>
+                    <span class="nav-link"
+                        ><i class="fa-regular fa-moon"></i
+                    ></span>
+
+                    <div class="user-profile">
+                        <img
+                            src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg"
+                            alt="User"
+                            class="user-avatar"
+                        />
+                        <span class="nav-link" style="color: #fff"
+                            >Alexander Pierce</span
+                        >
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div class="content-header">
+                    <h1>Dashboard</h1>
+                    <div class="breadcrumb"><span>Home</span> / Dashboard</div>
+                </div>
+
+                <div class="info-box-grid">
+                    <div class="card-box bg-blue">
+                        <div>
+                            <h3>150</h3>
+                            <p>New Orders</p>
+                        </div>
+                        <i class="fa-solid fa-cart-shopping icon-bg"></i>
+                        <a href="#" class="more-info"
+                            >More info
+                            <i class="fa-solid fa-circle-arrow-right"></i
+                        ></a>
+                    </div>
+
+                    <div class="card-box bg-green">
+                        <div>
+                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <p>Bounce Rate</p>
+                        </div>
+                        <i class="fa-solid fa-chart-bar icon-bg"></i>
+                        <a href="#" class="more-info"
+                            >More info
+                            <i class="fa-solid fa-circle-arrow-right"></i
+                        ></a>
+                    </div>
+
+                    <div class="card-box bg-yellow">
+                        <div>
+                            <h3>44</h3>
+                            <p>User Registrations</p>
+                        </div>
+                        <i class="fa-solid fa-user-plus icon-bg"></i>
+                        <a href="#" class="more-info"
+                            >More info
+                            <i class="fa-solid fa-circle-arrow-right"></i
+                        ></a>
+                    </div>
+
+                    <div class="card-box bg-red">
+                        <div>
+                            <h3>65</h3>
+                            <p>Unique Visitors</p>
+                        </div>
+                        <i class="fa-solid fa-chart-pie icon-bg"></i>
+                        <a href="#" class="more-info"
+                            >More info
+                            <i class="fa-solid fa-circle-arrow-right"></i
+                        ></a>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <span>Sales Value</span>
+                        </div>
+                        <div class="sales-graph-container"></div>
+                    </div>
+
+                    <div class="map-card"></div>
+                </div>
+
+                <div class="chat-card">
+                    <div class="chat-left">
+                        <i class="fa-regular fa-comments"></i>
+                        <span>Direct Chat</span>
+                        <span class="chat-badge">3</span>
+                    </div>
+                    <div class="chat-tools">
+                        <i class="fa-solid fa-minus"></i>
+                        <i class="fa-regular fa-comment-dots"></i>
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
